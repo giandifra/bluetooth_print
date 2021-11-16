@@ -94,8 +94,7 @@ class BluetoothPrint {
         .doOnDone(stopScan)
         .map((map) {
       final device = BluetoothDevice.fromJson(Map<String, dynamic>.from(map));
-      final List<BluetoothDevice> list =
-          _scanResults.value ?? <BluetoothDevice>[];
+      final List<BluetoothDevice> list = _scanResults.value;
       int newIndex = -1;
       list.asMap().forEach((index, e) {
         if (e.address == device.address) {
@@ -139,8 +138,7 @@ class BluetoothPrint {
     _channel.invokeMethod('rawBytes', args);
     return Future.value(true);
   }
-  
-  
+
   Future<dynamic> writeData(List<int> bytes) {
     Map<String, Object> args = Map();
     args['bytes'] = bytes;
